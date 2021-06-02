@@ -1,14 +1,16 @@
 from Office import Responses
 
 class ResponsesI(Responses):
-    def getId(suitorId, current):
+    def getId(self, suitorId, current):
+        idFile = open('id.txt', 'w')
+        idFile.write('{}'.format(suitorId))
+        idFile.close()
+
+    def getReturnResult(self, didReturnSucceed, current):
         pass
 
-    def getReturnResult(didReturnSucceed, current):
+    def getExpectedEndTime(self, expectedEndTime, current):
         pass
 
-    def getExpectedEndTime(expectedEndTime, current):
-        pass
-
-    def getResult(result, current):
+    def getResult(self, result, current):
         pass

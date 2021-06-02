@@ -16,13 +16,19 @@ public class SuitorsData {
         return instance;
     }
 
-    public void putNewSuitor(ResponsesPrx proxy) {
-        suitors.put(topId, proxy);
+    public int putNewSuitor(ResponsesPrx proxy) {
         topId++;
+        suitors.put(topId, proxy);
+        return topId;
     }
 
-    public void putNewSuitorProxy(Integer suitorId, ResponsesPrx proxy) {
-        suitors.put(suitorId, proxy);
+    public boolean putNewSuitorProxy(Integer suitorId, ResponsesPrx proxy) {
+        if (suitors.containsKey(suitorId)) {
+            suitors.put(suitorId, proxy);
+            return true;
+        }
+
+        return false;
     }
 
     public ResponsesPrx getSuitorProxy(Integer suitorId) {

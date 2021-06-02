@@ -7,12 +7,14 @@ public class RequestsI implements Requests {
 
     @Override
     public void onNewSuitor(ResponsesPrx responsesProxy, Current current) {
-        data.putNewSuitor(responsesProxy);
+        Integer newId = data.putNewSuitor(responsesProxy);
+        responsesProxy.getId(newId);
     }
 
     @Override
     public void onSuitorReturn(int suitorId, ResponsesPrx responsesProxy, Current current) {
-        data.putNewSuitorProxy(suitorId, responsesProxy);
+        boolean returnResult = data.putNewSuitorProxy(suitorId, responsesProxy);
+        responsesProxy.getReturnResult(returnResult);
     }
 
     @Override

@@ -236,29 +236,29 @@ if 'ResponsesPrx' not in _M_Office.__dict__:
     _M_Office.ResponsesPrx = Ice.createTempClass()
     class ResponsesPrx(Ice.ObjectPrx):
 
-        def getId(self, suitorId, context=None):
-            return _M_Office.Responses._op_getId.invoke(self, ((suitorId, ), context))
+        def getNumber(self, number, context=None):
+            return _M_Office.Responses._op_getNumber.invoke(self, ((number, ), context))
 
-        def getIdAsync(self, suitorId, context=None):
-            return _M_Office.Responses._op_getId.invokeAsync(self, ((suitorId, ), context))
+        def getNumberAsync(self, number, context=None):
+            return _M_Office.Responses._op_getNumber.invokeAsync(self, ((number, ), context))
 
-        def begin_getId(self, suitorId, _response=None, _ex=None, _sent=None, context=None):
-            return _M_Office.Responses._op_getId.begin(self, ((suitorId, ), _response, _ex, _sent, context))
+        def begin_getNumber(self, number, _response=None, _ex=None, _sent=None, context=None):
+            return _M_Office.Responses._op_getNumber.begin(self, ((number, ), _response, _ex, _sent, context))
 
-        def end_getId(self, _r):
-            return _M_Office.Responses._op_getId.end(self, _r)
+        def end_getNumber(self, _r):
+            return _M_Office.Responses._op_getNumber.end(self, _r)
 
-        def getReturnResult(self, didReturnSucceed, context=None):
-            return _M_Office.Responses._op_getReturnResult.invoke(self, ((didReturnSucceed, ), context))
+        def getReturnConfirmation(self, context=None):
+            return _M_Office.Responses._op_getReturnConfirmation.invoke(self, ((), context))
 
-        def getReturnResultAsync(self, didReturnSucceed, context=None):
-            return _M_Office.Responses._op_getReturnResult.invokeAsync(self, ((didReturnSucceed, ), context))
+        def getReturnConfirmationAsync(self, context=None):
+            return _M_Office.Responses._op_getReturnConfirmation.invokeAsync(self, ((), context))
 
-        def begin_getReturnResult(self, didReturnSucceed, _response=None, _ex=None, _sent=None, context=None):
-            return _M_Office.Responses._op_getReturnResult.begin(self, ((didReturnSucceed, ), _response, _ex, _sent, context))
+        def begin_getReturnConfirmation(self, _response=None, _ex=None, _sent=None, context=None):
+            return _M_Office.Responses._op_getReturnConfirmation.begin(self, ((), _response, _ex, _sent, context))
 
-        def end_getReturnResult(self, _r):
-            return _M_Office.Responses._op_getReturnResult.end(self, _r)
+        def end_getReturnConfirmation(self, _r):
+            return _M_Office.Responses._op_getReturnConfirmation.end(self, _r)
 
         def getExpectedEndTime(self, expectedEndTime, context=None):
             return _M_Office.Responses._op_getExpectedEndTime.invoke(self, ((expectedEndTime, ), context))
@@ -313,11 +313,11 @@ if 'ResponsesPrx' not in _M_Office.__dict__:
         def ice_staticId():
             return '::Office::Responses'
 
-        def getId(self, suitorId, current=None):
-            raise NotImplementedError("servant method 'getId' not implemented")
+        def getNumber(self, number, current=None):
+            raise NotImplementedError("servant method 'getNumber' not implemented")
 
-        def getReturnResult(self, didReturnSucceed, current=None):
-            raise NotImplementedError("servant method 'getReturnResult' not implemented")
+        def getReturnConfirmation(self, current=None):
+            raise NotImplementedError("servant method 'getReturnConfirmation' not implemented")
 
         def getExpectedEndTime(self, expectedEndTime, current=None):
             raise NotImplementedError("servant method 'getExpectedEndTime' not implemented")
@@ -333,8 +333,8 @@ if 'ResponsesPrx' not in _M_Office.__dict__:
     _M_Office._t_ResponsesDisp = IcePy.defineClass('::Office::Responses', Responses, (), None, ())
     Responses._ice_type = _M_Office._t_ResponsesDisp
 
-    Responses._op_getId = IcePy.Operation('getId', Ice.OperationMode.Normal, Ice.OperationMode.Normal, False, None, (), (((), IcePy._t_int, False, 0),), (), None, ())
-    Responses._op_getReturnResult = IcePy.Operation('getReturnResult', Ice.OperationMode.Normal, Ice.OperationMode.Normal, False, None, (), (((), IcePy._t_bool, False, 0),), (), None, ())
+    Responses._op_getNumber = IcePy.Operation('getNumber', Ice.OperationMode.Normal, Ice.OperationMode.Normal, False, None, (), (((), IcePy._t_int, False, 0),), (), None, ())
+    Responses._op_getReturnConfirmation = IcePy.Operation('getReturnConfirmation', Ice.OperationMode.Normal, Ice.OperationMode.Normal, False, None, (), (), (), None, ())
     Responses._op_getExpectedEndTime = IcePy.Operation('getExpectedEndTime', Ice.OperationMode.Normal, Ice.OperationMode.Normal, False, None, (), (((), _M_Office._t_Time, False, 0),), (), None, ())
     Responses._op_getResult = IcePy.Operation('getResult', Ice.OperationMode.Normal, Ice.OperationMode.Normal, False, None, (), (((), _M_Office._t_Result, False, 0),), (), None, ())
 
@@ -347,62 +347,50 @@ if 'RequestsPrx' not in _M_Office.__dict__:
     _M_Office.RequestsPrx = Ice.createTempClass()
     class RequestsPrx(Ice.ObjectPrx):
 
-        def onNewSuitor(self, responsesProxy, context=None):
-            return _M_Office.Requests._op_onNewSuitor.invoke(self, ((responsesProxy, ), context))
+        def onSuitorReturn(self, number, responsesProxy, context=None):
+            return _M_Office.Requests._op_onSuitorReturn.invoke(self, ((number, responsesProxy), context))
 
-        def onNewSuitorAsync(self, responsesProxy, context=None):
-            return _M_Office.Requests._op_onNewSuitor.invokeAsync(self, ((responsesProxy, ), context))
+        def onSuitorReturnAsync(self, number, responsesProxy, context=None):
+            return _M_Office.Requests._op_onSuitorReturn.invokeAsync(self, ((number, responsesProxy), context))
 
-        def begin_onNewSuitor(self, responsesProxy, _response=None, _ex=None, _sent=None, context=None):
-            return _M_Office.Requests._op_onNewSuitor.begin(self, ((responsesProxy, ), _response, _ex, _sent, context))
-
-        def end_onNewSuitor(self, _r):
-            return _M_Office.Requests._op_onNewSuitor.end(self, _r)
-
-        def onSuitorReturn(self, suitorId, responsesProxy, context=None):
-            return _M_Office.Requests._op_onSuitorReturn.invoke(self, ((suitorId, responsesProxy), context))
-
-        def onSuitorReturnAsync(self, suitorId, responsesProxy, context=None):
-            return _M_Office.Requests._op_onSuitorReturn.invokeAsync(self, ((suitorId, responsesProxy), context))
-
-        def begin_onSuitorReturn(self, suitorId, responsesProxy, _response=None, _ex=None, _sent=None, context=None):
-            return _M_Office.Requests._op_onSuitorReturn.begin(self, ((suitorId, responsesProxy), _response, _ex, _sent, context))
+        def begin_onSuitorReturn(self, number, responsesProxy, _response=None, _ex=None, _sent=None, context=None):
+            return _M_Office.Requests._op_onSuitorReturn.begin(self, ((number, responsesProxy), _response, _ex, _sent, context))
 
         def end_onSuitorReturn(self, _r):
             return _M_Office.Requests._op_onSuitorReturn.end(self, _r)
 
-        def passportCase(self, name, surname, duration, context=None):
-            return _M_Office.Requests._op_passportCase.invoke(self, ((name, surname, duration), context))
+        def passportCase(self, responsesProxy, name, surname, duration, context=None):
+            return _M_Office.Requests._op_passportCase.invoke(self, ((responsesProxy, name, surname, duration), context))
 
-        def passportCaseAsync(self, name, surname, duration, context=None):
-            return _M_Office.Requests._op_passportCase.invokeAsync(self, ((name, surname, duration), context))
+        def passportCaseAsync(self, responsesProxy, name, surname, duration, context=None):
+            return _M_Office.Requests._op_passportCase.invokeAsync(self, ((responsesProxy, name, surname, duration), context))
 
-        def begin_passportCase(self, name, surname, duration, _response=None, _ex=None, _sent=None, context=None):
-            return _M_Office.Requests._op_passportCase.begin(self, ((name, surname, duration), _response, _ex, _sent, context))
+        def begin_passportCase(self, responsesProxy, name, surname, duration, _response=None, _ex=None, _sent=None, context=None):
+            return _M_Office.Requests._op_passportCase.begin(self, ((responsesProxy, name, surname, duration), _response, _ex, _sent, context))
 
         def end_passportCase(self, _r):
             return _M_Office.Requests._op_passportCase.end(self, _r)
 
-        def buildPermitCase(self, surface, height, useSolarEnergy, isWooden, context=None):
-            return _M_Office.Requests._op_buildPermitCase.invoke(self, ((surface, height, useSolarEnergy, isWooden), context))
+        def buildPermitCase(self, responsesProxy, surface, height, useSolarEnergy, isWooden, context=None):
+            return _M_Office.Requests._op_buildPermitCase.invoke(self, ((responsesProxy, surface, height, useSolarEnergy, isWooden), context))
 
-        def buildPermitCaseAsync(self, surface, height, useSolarEnergy, isWooden, context=None):
-            return _M_Office.Requests._op_buildPermitCase.invokeAsync(self, ((surface, height, useSolarEnergy, isWooden), context))
+        def buildPermitCaseAsync(self, responsesProxy, surface, height, useSolarEnergy, isWooden, context=None):
+            return _M_Office.Requests._op_buildPermitCase.invokeAsync(self, ((responsesProxy, surface, height, useSolarEnergy, isWooden), context))
 
-        def begin_buildPermitCase(self, surface, height, useSolarEnergy, isWooden, _response=None, _ex=None, _sent=None, context=None):
-            return _M_Office.Requests._op_buildPermitCase.begin(self, ((surface, height, useSolarEnergy, isWooden), _response, _ex, _sent, context))
+        def begin_buildPermitCase(self, responsesProxy, surface, height, useSolarEnergy, isWooden, _response=None, _ex=None, _sent=None, context=None):
+            return _M_Office.Requests._op_buildPermitCase.begin(self, ((responsesProxy, surface, height, useSolarEnergy, isWooden), _response, _ex, _sent, context))
 
         def end_buildPermitCase(self, _r):
             return _M_Office.Requests._op_buildPermitCase.end(self, _r)
 
-        def demolitionPermitCase(self, surface, height, useDynamite, context=None):
-            return _M_Office.Requests._op_demolitionPermitCase.invoke(self, ((surface, height, useDynamite), context))
+        def demolitionPermitCase(self, responsesProxy, surface, height, useDynamite, context=None):
+            return _M_Office.Requests._op_demolitionPermitCase.invoke(self, ((responsesProxy, surface, height, useDynamite), context))
 
-        def demolitionPermitCaseAsync(self, surface, height, useDynamite, context=None):
-            return _M_Office.Requests._op_demolitionPermitCase.invokeAsync(self, ((surface, height, useDynamite), context))
+        def demolitionPermitCaseAsync(self, responsesProxy, surface, height, useDynamite, context=None):
+            return _M_Office.Requests._op_demolitionPermitCase.invokeAsync(self, ((responsesProxy, surface, height, useDynamite), context))
 
-        def begin_demolitionPermitCase(self, surface, height, useDynamite, _response=None, _ex=None, _sent=None, context=None):
-            return _M_Office.Requests._op_demolitionPermitCase.begin(self, ((surface, height, useDynamite), _response, _ex, _sent, context))
+        def begin_demolitionPermitCase(self, responsesProxy, surface, height, useDynamite, _response=None, _ex=None, _sent=None, context=None):
+            return _M_Office.Requests._op_demolitionPermitCase.begin(self, ((responsesProxy, surface, height, useDynamite), _response, _ex, _sent, context))
 
         def end_demolitionPermitCase(self, _r):
             return _M_Office.Requests._op_demolitionPermitCase.end(self, _r)
@@ -436,19 +424,16 @@ if 'RequestsPrx' not in _M_Office.__dict__:
         def ice_staticId():
             return '::Office::Requests'
 
-        def onNewSuitor(self, responsesProxy, current=None):
-            raise NotImplementedError("servant method 'onNewSuitor' not implemented")
-
-        def onSuitorReturn(self, suitorId, responsesProxy, current=None):
+        def onSuitorReturn(self, number, responsesProxy, current=None):
             raise NotImplementedError("servant method 'onSuitorReturn' not implemented")
 
-        def passportCase(self, name, surname, duration, current=None):
+        def passportCase(self, responsesProxy, name, surname, duration, current=None):
             raise NotImplementedError("servant method 'passportCase' not implemented")
 
-        def buildPermitCase(self, surface, height, useSolarEnergy, isWooden, current=None):
+        def buildPermitCase(self, responsesProxy, surface, height, useSolarEnergy, isWooden, current=None):
             raise NotImplementedError("servant method 'buildPermitCase' not implemented")
 
-        def demolitionPermitCase(self, surface, height, useDynamite, current=None):
+        def demolitionPermitCase(self, responsesProxy, surface, height, useDynamite, current=None):
             raise NotImplementedError("servant method 'demolitionPermitCase' not implemented")
 
         def __str__(self):
@@ -459,11 +444,10 @@ if 'RequestsPrx' not in _M_Office.__dict__:
     _M_Office._t_RequestsDisp = IcePy.defineClass('::Office::Requests', Requests, (), None, ())
     Requests._ice_type = _M_Office._t_RequestsDisp
 
-    Requests._op_onNewSuitor = IcePy.Operation('onNewSuitor', Ice.OperationMode.Normal, Ice.OperationMode.Normal, False, None, (), (((), _M_Office._t_ResponsesPrx, False, 0),), (), None, ())
     Requests._op_onSuitorReturn = IcePy.Operation('onSuitorReturn', Ice.OperationMode.Normal, Ice.OperationMode.Normal, False, None, (), (((), IcePy._t_int, False, 0), ((), _M_Office._t_ResponsesPrx, False, 0)), (), None, ())
-    Requests._op_passportCase = IcePy.Operation('passportCase', Ice.OperationMode.Normal, Ice.OperationMode.Normal, False, None, (), (((), IcePy._t_string, False, 0), ((), IcePy._t_string, False, 0), ((), IcePy._t_int, False, 0)), (), None, ())
-    Requests._op_buildPermitCase = IcePy.Operation('buildPermitCase', Ice.OperationMode.Normal, Ice.OperationMode.Normal, False, None, (), (((), IcePy._t_int, False, 0), ((), IcePy._t_int, False, 0), ((), IcePy._t_bool, False, 0), ((), IcePy._t_bool, False, 0)), (), None, ())
-    Requests._op_demolitionPermitCase = IcePy.Operation('demolitionPermitCase', Ice.OperationMode.Normal, Ice.OperationMode.Normal, False, None, (), (((), IcePy._t_int, False, 0), ((), IcePy._t_int, False, 0), ((), IcePy._t_bool, False, 0)), (), None, ())
+    Requests._op_passportCase = IcePy.Operation('passportCase', Ice.OperationMode.Normal, Ice.OperationMode.Normal, False, None, (), (((), _M_Office._t_ResponsesPrx, False, 0), ((), IcePy._t_string, False, 0), ((), IcePy._t_string, False, 0), ((), IcePy._t_int, False, 0)), (), None, ())
+    Requests._op_buildPermitCase = IcePy.Operation('buildPermitCase', Ice.OperationMode.Normal, Ice.OperationMode.Normal, False, None, (), (((), _M_Office._t_ResponsesPrx, False, 0), ((), IcePy._t_int, False, 0), ((), IcePy._t_int, False, 0), ((), IcePy._t_bool, False, 0), ((), IcePy._t_bool, False, 0)), (), None, ())
+    Requests._op_demolitionPermitCase = IcePy.Operation('demolitionPermitCase', Ice.OperationMode.Normal, Ice.OperationMode.Normal, False, None, (), (((), _M_Office._t_ResponsesPrx, False, 0), ((), IcePy._t_int, False, 0), ((), IcePy._t_int, False, 0), ((), IcePy._t_bool, False, 0)), (), None, ())
 
     _M_Office.Requests = Requests
     del Requests

@@ -15,17 +15,17 @@
 
 package Office;
 
+import java.util.concurrent.ExecutionException;
+
 public interface Requests extends com.zeroc.Ice.Object
 {
-    void onNewSuitor(ResponsesPrx responsesProxy, com.zeroc.Ice.Current current);
+    void onSuitorReturn(int number, ResponsesPrx responsesProxy, com.zeroc.Ice.Current current) throws ExecutionException, InterruptedException;
 
-    void onSuitorReturn(int suitorId, ResponsesPrx responsesProxy, com.zeroc.Ice.Current current);
+    void passportCase(ResponsesPrx responsesProxy, String name, String surname, int duration, com.zeroc.Ice.Current current);
 
-    void passportCase(String name, String surname, int duration, com.zeroc.Ice.Current current);
+    void buildPermitCase(ResponsesPrx responsesProxy, int surface, int height, boolean useSolarEnergy, boolean isWooden, com.zeroc.Ice.Current current);
 
-    void buildPermitCase(int surface, int height, boolean useSolarEnergy, boolean isWooden, com.zeroc.Ice.Current current);
-
-    void demolitionPermitCase(int surface, int height, boolean useDynamite, com.zeroc.Ice.Current current);
+    void demolitionPermitCase(ResponsesPrx responsesProxy, int surface, int height, boolean useDynamite, com.zeroc.Ice.Current current);
 
     /** @hidden */
     static final String[] _iceIds =
@@ -58,34 +58,16 @@ public interface Requests extends com.zeroc.Ice.Object
      * @param current -
      * @return -
     **/
-    static java.util.concurrent.CompletionStage<com.zeroc.Ice.OutputStream> _iceD_onNewSuitor(Requests obj, final com.zeroc.IceInternal.Incoming inS, com.zeroc.Ice.Current current)
-    {
-        com.zeroc.Ice.Object._iceCheckMode(null, current.mode);
-        com.zeroc.Ice.InputStream istr = inS.startReadParams();
-        ResponsesPrx iceP_responsesProxy;
-        iceP_responsesProxy = ResponsesPrx.uncheckedCast(istr.readProxy());
-        inS.endReadParams();
-        obj.onNewSuitor(iceP_responsesProxy, current);
-        return inS.setResult(inS.writeEmptyParams());
-    }
-
-    /**
-     * @hidden
-     * @param obj -
-     * @param inS -
-     * @param current -
-     * @return -
-    **/
     static java.util.concurrent.CompletionStage<com.zeroc.Ice.OutputStream> _iceD_onSuitorReturn(Requests obj, final com.zeroc.IceInternal.Incoming inS, com.zeroc.Ice.Current current)
     {
         com.zeroc.Ice.Object._iceCheckMode(null, current.mode);
         com.zeroc.Ice.InputStream istr = inS.startReadParams();
-        int iceP_suitorId;
+        int iceP_number;
         ResponsesPrx iceP_responsesProxy;
-        iceP_suitorId = istr.readInt();
+        iceP_number = istr.readInt();
         iceP_responsesProxy = ResponsesPrx.uncheckedCast(istr.readProxy());
         inS.endReadParams();
-        obj.onSuitorReturn(iceP_suitorId, iceP_responsesProxy, current);
+        obj.onSuitorReturn(iceP_number, iceP_responsesProxy, current);
         return inS.setResult(inS.writeEmptyParams());
     }
 
@@ -100,14 +82,16 @@ public interface Requests extends com.zeroc.Ice.Object
     {
         com.zeroc.Ice.Object._iceCheckMode(null, current.mode);
         com.zeroc.Ice.InputStream istr = inS.startReadParams();
+        ResponsesPrx iceP_responsesProxy;
         String iceP_name;
         String iceP_surname;
         int iceP_duration;
+        iceP_responsesProxy = ResponsesPrx.uncheckedCast(istr.readProxy());
         iceP_name = istr.readString();
         iceP_surname = istr.readString();
         iceP_duration = istr.readInt();
         inS.endReadParams();
-        obj.passportCase(iceP_name, iceP_surname, iceP_duration, current);
+        obj.passportCase(iceP_responsesProxy, iceP_name, iceP_surname, iceP_duration, current);
         return inS.setResult(inS.writeEmptyParams());
     }
 
@@ -122,16 +106,18 @@ public interface Requests extends com.zeroc.Ice.Object
     {
         com.zeroc.Ice.Object._iceCheckMode(null, current.mode);
         com.zeroc.Ice.InputStream istr = inS.startReadParams();
+        ResponsesPrx iceP_responsesProxy;
         int iceP_surface;
         int iceP_height;
         boolean iceP_useSolarEnergy;
         boolean iceP_isWooden;
+        iceP_responsesProxy = ResponsesPrx.uncheckedCast(istr.readProxy());
         iceP_surface = istr.readInt();
         iceP_height = istr.readInt();
         iceP_useSolarEnergy = istr.readBool();
         iceP_isWooden = istr.readBool();
         inS.endReadParams();
-        obj.buildPermitCase(iceP_surface, iceP_height, iceP_useSolarEnergy, iceP_isWooden, current);
+        obj.buildPermitCase(iceP_responsesProxy, iceP_surface, iceP_height, iceP_useSolarEnergy, iceP_isWooden, current);
         return inS.setResult(inS.writeEmptyParams());
     }
 
@@ -146,14 +132,16 @@ public interface Requests extends com.zeroc.Ice.Object
     {
         com.zeroc.Ice.Object._iceCheckMode(null, current.mode);
         com.zeroc.Ice.InputStream istr = inS.startReadParams();
+        ResponsesPrx iceP_responsesProxy;
         int iceP_surface;
         int iceP_height;
         boolean iceP_useDynamite;
+        iceP_responsesProxy = ResponsesPrx.uncheckedCast(istr.readProxy());
         iceP_surface = istr.readInt();
         iceP_height = istr.readInt();
         iceP_useDynamite = istr.readBool();
         inS.endReadParams();
-        obj.demolitionPermitCase(iceP_surface, iceP_height, iceP_useDynamite, current);
+        obj.demolitionPermitCase(iceP_responsesProxy, iceP_surface, iceP_height, iceP_useDynamite, current);
         return inS.setResult(inS.writeEmptyParams());
     }
 
@@ -166,7 +154,6 @@ public interface Requests extends com.zeroc.Ice.Object
         "ice_ids",
         "ice_isA",
         "ice_ping",
-        "onNewSuitor",
         "onSuitorReturn",
         "passportCase"
     };
@@ -210,13 +197,9 @@ public interface Requests extends com.zeroc.Ice.Object
             }
             case 6:
             {
-                return _iceD_onNewSuitor(this, in, current);
-            }
-            case 7:
-            {
                 return _iceD_onSuitorReturn(this, in, current);
             }
-            case 8:
+            case 7:
             {
                 return _iceD_passportCase(this, in, current);
             }

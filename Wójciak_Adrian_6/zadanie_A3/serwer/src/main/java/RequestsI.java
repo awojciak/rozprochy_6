@@ -1,34 +1,139 @@
 import Office.Requests;
 import Office.ResponsesPrx;
+import Office.Result;
+import Office.Time;
 import com.zeroc.Ice.Current;
+
+import java.time.LocalTime;
+import java.util.Random;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
 
 public class RequestsI implements Requests {
     SuitorsData data = SuitorsData.getInstance();
+    Random rand = new Random();
 
     @Override
-    public void onNewSuitor(ResponsesPrx responsesProxy, Current current) {
+    public void onSuitorReturn(int number, ResponsesPrx responsesProxy, Current current) throws ExecutionException, InterruptedException {
+        data.putNewSuitorProxy(number, responsesProxy);
+        responsesProxy.getReturnConfirmation();
+
+        if (data.getResult(number).isDone()) {
+            responsesProxy.getResult(data.getResult(number).get());
+        }
+    }
+
+    @Override
+    public void passportCase(ResponsesPrx responsesProxy, String name, String surname, int duration, Current current) {
         Integer newId = data.putNewSuitor(responsesProxy);
-        responsesProxy.getId(newId);
+        responsesProxy.getNumber(newId);
+
+        Integer expectedDuration = rand.nextInt(60) + 60;
+        LocalTime time = LocalTime.now();
+        Time expectedEndTime = new Time(
+                (time.getHour() + ((time.getMinute() + ((time.getSecond() + expectedDuration) / 60)) / 60)) % 24,
+                (time.getMinute() + ((time.getSecond() + expectedDuration) / 60)) % 60,
+                (time.getSecond() + expectedDuration) % 60
+        );
+        responsesProxy.getExpectedEndTime(expectedEndTime);
+
+        Integer delay = rand.nextInt(30);
+        Time finalEndTime = new Time(
+                (time.getHour() + ((time.getMinute() + ((time.getSecond() + expectedDuration + delay) / 60)) / 60)) % 24,
+                (time.getMinute() + ((time.getSecond() + expectedDuration + delay) / 60)) % 60,
+                (time.getSecond() + expectedDuration + delay) % 60
+        );
+        String caseType = "passport";
+        boolean isResultPositive = duration < 120;
+        Result result = new Result(isResultPositive, finalEndTime, caseType);
+
+        data.putCase(newId, CompletableFuture.supplyAsync(
+                () -> {
+                    try {
+                        Thread.sleep((expectedDuration + delay) * 1000);
+                        SuitorsData.getInstance().getSuitorProxy(newId).getResult(result);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+
+                    return result;
+                }
+        ));
     }
 
     @Override
-    public void onSuitorReturn(int suitorId, ResponsesPrx responsesProxy, Current current) {
-        boolean returnResult = data.putNewSuitorProxy(suitorId, responsesProxy);
-        responsesProxy.getReturnResult(returnResult);
+    public void buildPermitCase(ResponsesPrx responsesProxy, int surface, int height, boolean useSolarEnergy, boolean isWooden, Current current) {
+        Integer newId = data.putNewSuitor(responsesProxy);
+        responsesProxy.getNumber(newId);
+
+        Integer expectedDuration = rand.nextInt(60) + 60;
+        LocalTime time = LocalTime.now();
+        Time expectedEndTime = new Time(
+                (time.getHour() + ((time.getMinute() + ((time.getSecond() + expectedDuration) / 60)) / 60)) % 24,
+                (time.getMinute() + ((time.getSecond() + expectedDuration) / 60)) % 60,
+                (time.getSecond() + expectedDuration) % 60
+        );
+        responsesProxy.getExpectedEndTime(expectedEndTime);
+
+        Integer delay = rand.nextInt(30);
+        Time finalEndTime = new Time(
+                (time.getHour() + ((time.getMinute() + ((time.getSecond() + expectedDuration + delay) / 60)) / 60)) % 24,
+                (time.getMinute() + ((time.getSecond() + expectedDuration + delay) / 60)) % 60,
+                (time.getSecond() + expectedDuration + delay) % 60
+        );
+        String caseType = "build permit";
+        boolean isResultPositive = (surface < 60) && (height < 15) && (!isWooden || useSolarEnergy);
+        Result result = new Result(isResultPositive, finalEndTime, caseType);
+
+        data.putCase(newId, CompletableFuture.supplyAsync(
+                () -> {
+                    try {
+                        Thread.sleep((expectedDuration + delay) * 1000);
+                        SuitorsData.getInstance().getSuitorProxy(newId).getResult(result);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+
+                    return result;
+                }
+        ));
     }
 
     @Override
-    public void passportCase(String name, String surname, int duration, Current current) {
+    public void demolitionPermitCase(ResponsesPrx responsesProxy, int surface, int height, boolean useDynamite, Current current) {
+        Integer newId = data.putNewSuitor(responsesProxy);
+        responsesProxy.getNumber(newId);
 
-    }
+        Integer expectedDuration = rand.nextInt(60) + 60;
+        LocalTime time = LocalTime.now();
+        Time expectedEndTime = new Time(
+                (time.getHour() + ((time.getMinute() + ((time.getSecond() + expectedDuration) / 60)) / 60)) % 24,
+                (time.getMinute() + ((time.getSecond() + expectedDuration) / 60)) % 60,
+                (time.getSecond() + expectedDuration) % 60
+        );
+        responsesProxy.getExpectedEndTime(expectedEndTime);
 
-    @Override
-    public void buildPermitCase(int surface, int height, boolean useSolarEnergy, boolean isWooden, Current current) {
+        Integer delay = rand.nextInt(30);
+        Time finalEndTime = new Time(
+                (time.getHour() + ((time.getMinute() + ((time.getSecond() + expectedDuration + delay) / 60)) / 60)) % 24,
+                (time.getMinute() + ((time.getSecond() + expectedDuration + delay) / 60)) % 60,
+                (time.getSecond() + expectedDuration + delay) % 60
+        );
+        String caseType = "build permit";
+        boolean isResultPositive = (surface < 100) && (height < 10) && (!useDynamite);
+        Result result = new Result(isResultPositive, finalEndTime, caseType);
 
-    }
+        data.putCase(newId, CompletableFuture.supplyAsync(
+                () -> {
+                    try {
+                        Thread.sleep((expectedDuration + delay) * 1000);
+                        SuitorsData.getInstance().getSuitorProxy(newId).getResult(result);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
 
-    @Override
-    public void demolitionPermitCase(int surface, int height, boolean useDynamite, Current current) {
-
+                    return result;
+                }
+        ));
     }
 }

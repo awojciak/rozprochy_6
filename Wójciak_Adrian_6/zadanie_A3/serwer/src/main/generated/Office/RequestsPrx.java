@@ -17,102 +17,67 @@ package Office;
 
 public interface RequestsPrx extends com.zeroc.Ice.ObjectPrx
 {
-    default void onNewSuitor(ResponsesPrx responsesProxy)
+    default void onSuitorReturn(int number, ResponsesPrx responsesProxy)
     {
-        onNewSuitor(responsesProxy, com.zeroc.Ice.ObjectPrx.noExplicitContext);
+        onSuitorReturn(number, responsesProxy, com.zeroc.Ice.ObjectPrx.noExplicitContext);
     }
 
-    default void onNewSuitor(ResponsesPrx responsesProxy, java.util.Map<String, String> context)
+    default void onSuitorReturn(int number, ResponsesPrx responsesProxy, java.util.Map<String, String> context)
     {
-        _iceI_onNewSuitorAsync(responsesProxy, context, true).waitForResponse();
+        _iceI_onSuitorReturnAsync(number, responsesProxy, context, true).waitForResponse();
     }
 
-    default java.util.concurrent.CompletableFuture<Void> onNewSuitorAsync(ResponsesPrx responsesProxy)
+    default java.util.concurrent.CompletableFuture<Void> onSuitorReturnAsync(int number, ResponsesPrx responsesProxy)
     {
-        return _iceI_onNewSuitorAsync(responsesProxy, com.zeroc.Ice.ObjectPrx.noExplicitContext, false);
+        return _iceI_onSuitorReturnAsync(number, responsesProxy, com.zeroc.Ice.ObjectPrx.noExplicitContext, false);
     }
 
-    default java.util.concurrent.CompletableFuture<Void> onNewSuitorAsync(ResponsesPrx responsesProxy, java.util.Map<String, String> context)
+    default java.util.concurrent.CompletableFuture<Void> onSuitorReturnAsync(int number, ResponsesPrx responsesProxy, java.util.Map<String, String> context)
     {
-        return _iceI_onNewSuitorAsync(responsesProxy, context, false);
+        return _iceI_onSuitorReturnAsync(number, responsesProxy, context, false);
     }
 
     /**
      * @hidden
+     * @param iceP_number -
      * @param iceP_responsesProxy -
      * @param context -
      * @param sync -
      * @return -
      **/
-    default com.zeroc.IceInternal.OutgoingAsync<Void> _iceI_onNewSuitorAsync(ResponsesPrx iceP_responsesProxy, java.util.Map<String, String> context, boolean sync)
-    {
-        com.zeroc.IceInternal.OutgoingAsync<Void> f = new com.zeroc.IceInternal.OutgoingAsync<>(this, "onNewSuitor", null, sync, null);
-        f.invoke(false, context, null, ostr -> {
-                     ostr.writeProxy(iceP_responsesProxy);
-                 }, null);
-        return f;
-    }
-
-    default void onSuitorReturn(int suitorId, ResponsesPrx responsesProxy)
-    {
-        onSuitorReturn(suitorId, responsesProxy, com.zeroc.Ice.ObjectPrx.noExplicitContext);
-    }
-
-    default void onSuitorReturn(int suitorId, ResponsesPrx responsesProxy, java.util.Map<String, String> context)
-    {
-        _iceI_onSuitorReturnAsync(suitorId, responsesProxy, context, true).waitForResponse();
-    }
-
-    default java.util.concurrent.CompletableFuture<Void> onSuitorReturnAsync(int suitorId, ResponsesPrx responsesProxy)
-    {
-        return _iceI_onSuitorReturnAsync(suitorId, responsesProxy, com.zeroc.Ice.ObjectPrx.noExplicitContext, false);
-    }
-
-    default java.util.concurrent.CompletableFuture<Void> onSuitorReturnAsync(int suitorId, ResponsesPrx responsesProxy, java.util.Map<String, String> context)
-    {
-        return _iceI_onSuitorReturnAsync(suitorId, responsesProxy, context, false);
-    }
-
-    /**
-     * @hidden
-     * @param iceP_suitorId -
-     * @param iceP_responsesProxy -
-     * @param context -
-     * @param sync -
-     * @return -
-     **/
-    default com.zeroc.IceInternal.OutgoingAsync<Void> _iceI_onSuitorReturnAsync(int iceP_suitorId, ResponsesPrx iceP_responsesProxy, java.util.Map<String, String> context, boolean sync)
+    default com.zeroc.IceInternal.OutgoingAsync<Void> _iceI_onSuitorReturnAsync(int iceP_number, ResponsesPrx iceP_responsesProxy, java.util.Map<String, String> context, boolean sync)
     {
         com.zeroc.IceInternal.OutgoingAsync<Void> f = new com.zeroc.IceInternal.OutgoingAsync<>(this, "onSuitorReturn", null, sync, null);
         f.invoke(false, context, null, ostr -> {
-                     ostr.writeInt(iceP_suitorId);
+                     ostr.writeInt(iceP_number);
                      ostr.writeProxy(iceP_responsesProxy);
                  }, null);
         return f;
     }
 
-    default void passportCase(String name, String surname, int duration)
+    default void passportCase(ResponsesPrx responsesProxy, String name, String surname, int duration)
     {
-        passportCase(name, surname, duration, com.zeroc.Ice.ObjectPrx.noExplicitContext);
+        passportCase(responsesProxy, name, surname, duration, com.zeroc.Ice.ObjectPrx.noExplicitContext);
     }
 
-    default void passportCase(String name, String surname, int duration, java.util.Map<String, String> context)
+    default void passportCase(ResponsesPrx responsesProxy, String name, String surname, int duration, java.util.Map<String, String> context)
     {
-        _iceI_passportCaseAsync(name, surname, duration, context, true).waitForResponse();
+        _iceI_passportCaseAsync(responsesProxy, name, surname, duration, context, true).waitForResponse();
     }
 
-    default java.util.concurrent.CompletableFuture<Void> passportCaseAsync(String name, String surname, int duration)
+    default java.util.concurrent.CompletableFuture<Void> passportCaseAsync(ResponsesPrx responsesProxy, String name, String surname, int duration)
     {
-        return _iceI_passportCaseAsync(name, surname, duration, com.zeroc.Ice.ObjectPrx.noExplicitContext, false);
+        return _iceI_passportCaseAsync(responsesProxy, name, surname, duration, com.zeroc.Ice.ObjectPrx.noExplicitContext, false);
     }
 
-    default java.util.concurrent.CompletableFuture<Void> passportCaseAsync(String name, String surname, int duration, java.util.Map<String, String> context)
+    default java.util.concurrent.CompletableFuture<Void> passportCaseAsync(ResponsesPrx responsesProxy, String name, String surname, int duration, java.util.Map<String, String> context)
     {
-        return _iceI_passportCaseAsync(name, surname, duration, context, false);
+        return _iceI_passportCaseAsync(responsesProxy, name, surname, duration, context, false);
     }
 
     /**
      * @hidden
+     * @param iceP_responsesProxy -
      * @param iceP_name -
      * @param iceP_surname -
      * @param iceP_duration -
@@ -120,10 +85,11 @@ public interface RequestsPrx extends com.zeroc.Ice.ObjectPrx
      * @param sync -
      * @return -
      **/
-    default com.zeroc.IceInternal.OutgoingAsync<Void> _iceI_passportCaseAsync(String iceP_name, String iceP_surname, int iceP_duration, java.util.Map<String, String> context, boolean sync)
+    default com.zeroc.IceInternal.OutgoingAsync<Void> _iceI_passportCaseAsync(ResponsesPrx iceP_responsesProxy, String iceP_name, String iceP_surname, int iceP_duration, java.util.Map<String, String> context, boolean sync)
     {
         com.zeroc.IceInternal.OutgoingAsync<Void> f = new com.zeroc.IceInternal.OutgoingAsync<>(this, "passportCase", null, sync, null);
         f.invoke(false, context, null, ostr -> {
+                     ostr.writeProxy(iceP_responsesProxy);
                      ostr.writeString(iceP_name);
                      ostr.writeString(iceP_surname);
                      ostr.writeInt(iceP_duration);
@@ -131,28 +97,29 @@ public interface RequestsPrx extends com.zeroc.Ice.ObjectPrx
         return f;
     }
 
-    default void buildPermitCase(int surface, int height, boolean useSolarEnergy, boolean isWooden)
+    default void buildPermitCase(ResponsesPrx responsesProxy, int surface, int height, boolean useSolarEnergy, boolean isWooden)
     {
-        buildPermitCase(surface, height, useSolarEnergy, isWooden, com.zeroc.Ice.ObjectPrx.noExplicitContext);
+        buildPermitCase(responsesProxy, surface, height, useSolarEnergy, isWooden, com.zeroc.Ice.ObjectPrx.noExplicitContext);
     }
 
-    default void buildPermitCase(int surface, int height, boolean useSolarEnergy, boolean isWooden, java.util.Map<String, String> context)
+    default void buildPermitCase(ResponsesPrx responsesProxy, int surface, int height, boolean useSolarEnergy, boolean isWooden, java.util.Map<String, String> context)
     {
-        _iceI_buildPermitCaseAsync(surface, height, useSolarEnergy, isWooden, context, true).waitForResponse();
+        _iceI_buildPermitCaseAsync(responsesProxy, surface, height, useSolarEnergy, isWooden, context, true).waitForResponse();
     }
 
-    default java.util.concurrent.CompletableFuture<Void> buildPermitCaseAsync(int surface, int height, boolean useSolarEnergy, boolean isWooden)
+    default java.util.concurrent.CompletableFuture<Void> buildPermitCaseAsync(ResponsesPrx responsesProxy, int surface, int height, boolean useSolarEnergy, boolean isWooden)
     {
-        return _iceI_buildPermitCaseAsync(surface, height, useSolarEnergy, isWooden, com.zeroc.Ice.ObjectPrx.noExplicitContext, false);
+        return _iceI_buildPermitCaseAsync(responsesProxy, surface, height, useSolarEnergy, isWooden, com.zeroc.Ice.ObjectPrx.noExplicitContext, false);
     }
 
-    default java.util.concurrent.CompletableFuture<Void> buildPermitCaseAsync(int surface, int height, boolean useSolarEnergy, boolean isWooden, java.util.Map<String, String> context)
+    default java.util.concurrent.CompletableFuture<Void> buildPermitCaseAsync(ResponsesPrx responsesProxy, int surface, int height, boolean useSolarEnergy, boolean isWooden, java.util.Map<String, String> context)
     {
-        return _iceI_buildPermitCaseAsync(surface, height, useSolarEnergy, isWooden, context, false);
+        return _iceI_buildPermitCaseAsync(responsesProxy, surface, height, useSolarEnergy, isWooden, context, false);
     }
 
     /**
      * @hidden
+     * @param iceP_responsesProxy -
      * @param iceP_surface -
      * @param iceP_height -
      * @param iceP_useSolarEnergy -
@@ -161,10 +128,11 @@ public interface RequestsPrx extends com.zeroc.Ice.ObjectPrx
      * @param sync -
      * @return -
      **/
-    default com.zeroc.IceInternal.OutgoingAsync<Void> _iceI_buildPermitCaseAsync(int iceP_surface, int iceP_height, boolean iceP_useSolarEnergy, boolean iceP_isWooden, java.util.Map<String, String> context, boolean sync)
+    default com.zeroc.IceInternal.OutgoingAsync<Void> _iceI_buildPermitCaseAsync(ResponsesPrx iceP_responsesProxy, int iceP_surface, int iceP_height, boolean iceP_useSolarEnergy, boolean iceP_isWooden, java.util.Map<String, String> context, boolean sync)
     {
         com.zeroc.IceInternal.OutgoingAsync<Void> f = new com.zeroc.IceInternal.OutgoingAsync<>(this, "buildPermitCase", null, sync, null);
         f.invoke(false, context, null, ostr -> {
+                     ostr.writeProxy(iceP_responsesProxy);
                      ostr.writeInt(iceP_surface);
                      ostr.writeInt(iceP_height);
                      ostr.writeBool(iceP_useSolarEnergy);
@@ -173,28 +141,29 @@ public interface RequestsPrx extends com.zeroc.Ice.ObjectPrx
         return f;
     }
 
-    default void demolitionPermitCase(int surface, int height, boolean useDynamite)
+    default void demolitionPermitCase(ResponsesPrx responsesProxy, int surface, int height, boolean useDynamite)
     {
-        demolitionPermitCase(surface, height, useDynamite, com.zeroc.Ice.ObjectPrx.noExplicitContext);
+        demolitionPermitCase(responsesProxy, surface, height, useDynamite, com.zeroc.Ice.ObjectPrx.noExplicitContext);
     }
 
-    default void demolitionPermitCase(int surface, int height, boolean useDynamite, java.util.Map<String, String> context)
+    default void demolitionPermitCase(ResponsesPrx responsesProxy, int surface, int height, boolean useDynamite, java.util.Map<String, String> context)
     {
-        _iceI_demolitionPermitCaseAsync(surface, height, useDynamite, context, true).waitForResponse();
+        _iceI_demolitionPermitCaseAsync(responsesProxy, surface, height, useDynamite, context, true).waitForResponse();
     }
 
-    default java.util.concurrent.CompletableFuture<Void> demolitionPermitCaseAsync(int surface, int height, boolean useDynamite)
+    default java.util.concurrent.CompletableFuture<Void> demolitionPermitCaseAsync(ResponsesPrx responsesProxy, int surface, int height, boolean useDynamite)
     {
-        return _iceI_demolitionPermitCaseAsync(surface, height, useDynamite, com.zeroc.Ice.ObjectPrx.noExplicitContext, false);
+        return _iceI_demolitionPermitCaseAsync(responsesProxy, surface, height, useDynamite, com.zeroc.Ice.ObjectPrx.noExplicitContext, false);
     }
 
-    default java.util.concurrent.CompletableFuture<Void> demolitionPermitCaseAsync(int surface, int height, boolean useDynamite, java.util.Map<String, String> context)
+    default java.util.concurrent.CompletableFuture<Void> demolitionPermitCaseAsync(ResponsesPrx responsesProxy, int surface, int height, boolean useDynamite, java.util.Map<String, String> context)
     {
-        return _iceI_demolitionPermitCaseAsync(surface, height, useDynamite, context, false);
+        return _iceI_demolitionPermitCaseAsync(responsesProxy, surface, height, useDynamite, context, false);
     }
 
     /**
      * @hidden
+     * @param iceP_responsesProxy -
      * @param iceP_surface -
      * @param iceP_height -
      * @param iceP_useDynamite -
@@ -202,10 +171,11 @@ public interface RequestsPrx extends com.zeroc.Ice.ObjectPrx
      * @param sync -
      * @return -
      **/
-    default com.zeroc.IceInternal.OutgoingAsync<Void> _iceI_demolitionPermitCaseAsync(int iceP_surface, int iceP_height, boolean iceP_useDynamite, java.util.Map<String, String> context, boolean sync)
+    default com.zeroc.IceInternal.OutgoingAsync<Void> _iceI_demolitionPermitCaseAsync(ResponsesPrx iceP_responsesProxy, int iceP_surface, int iceP_height, boolean iceP_useDynamite, java.util.Map<String, String> context, boolean sync)
     {
         com.zeroc.IceInternal.OutgoingAsync<Void> f = new com.zeroc.IceInternal.OutgoingAsync<>(this, "demolitionPermitCase", null, sync, null);
         f.invoke(false, context, null, ostr -> {
+                     ostr.writeProxy(iceP_responsesProxy);
                      ostr.writeInt(iceP_surface);
                      ostr.writeInt(iceP_height);
                      ostr.writeBool(iceP_useDynamite);

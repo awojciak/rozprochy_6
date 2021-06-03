@@ -19,19 +19,18 @@ module Office
 
     interface Responses
     {
-        void getId(int suitorId);
-        void getReturnResult(bool didReturnSucceed);
+        void getNumber(int number);
+        void getReturnConfirmation();
         void getExpectedEndTime(Time expectedEndTime);
         void getResult(Result result);
     }
 
     interface Requests
     {
-        void onNewSuitor(Responses* responsesProxy);
-        void onSuitorReturn(int suitorId, Responses* responsesProxy);
-        void passportCase(string name, string surname, int duration);
-        void buildPermitCase(int surface, int height, bool useSolarEnergy, bool isWooden);
-        void demolitionPermitCase(int surface, int height, bool useDynamite);
+        void onSuitorReturn(int number, Responses* responsesProxy);
+        void passportCase(Responses* responsesProxy, string name, string surname, int duration);
+        void buildPermitCase(Responses* responsesProxy, int surface, int height, bool useSolarEnergy, bool isWooden);
+        void demolitionPermitCase(Responses* responsesProxy, int surface, int height, bool useDynamite);
     }
 }
 

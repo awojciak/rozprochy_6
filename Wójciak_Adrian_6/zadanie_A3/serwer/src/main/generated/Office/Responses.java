@@ -17,9 +17,9 @@ package Office;
 
 public interface Responses extends com.zeroc.Ice.Object
 {
-    void getId(int suitorId, com.zeroc.Ice.Current current);
+    void getNumber(int number, com.zeroc.Ice.Current current);
 
-    void getReturnResult(boolean didReturnSucceed, com.zeroc.Ice.Current current);
+    void getReturnConfirmation(com.zeroc.Ice.Current current);
 
     void getExpectedEndTime(Time expectedEndTime, com.zeroc.Ice.Current current);
 
@@ -56,14 +56,14 @@ public interface Responses extends com.zeroc.Ice.Object
      * @param current -
      * @return -
     **/
-    static java.util.concurrent.CompletionStage<com.zeroc.Ice.OutputStream> _iceD_getId(Responses obj, final com.zeroc.IceInternal.Incoming inS, com.zeroc.Ice.Current current)
+    static java.util.concurrent.CompletionStage<com.zeroc.Ice.OutputStream> _iceD_getNumber(Responses obj, final com.zeroc.IceInternal.Incoming inS, com.zeroc.Ice.Current current)
     {
         com.zeroc.Ice.Object._iceCheckMode(null, current.mode);
         com.zeroc.Ice.InputStream istr = inS.startReadParams();
-        int iceP_suitorId;
-        iceP_suitorId = istr.readInt();
+        int iceP_number;
+        iceP_number = istr.readInt();
         inS.endReadParams();
-        obj.getId(iceP_suitorId, current);
+        obj.getNumber(iceP_number, current);
         return inS.setResult(inS.writeEmptyParams());
     }
 
@@ -74,14 +74,11 @@ public interface Responses extends com.zeroc.Ice.Object
      * @param current -
      * @return -
     **/
-    static java.util.concurrent.CompletionStage<com.zeroc.Ice.OutputStream> _iceD_getReturnResult(Responses obj, final com.zeroc.IceInternal.Incoming inS, com.zeroc.Ice.Current current)
+    static java.util.concurrent.CompletionStage<com.zeroc.Ice.OutputStream> _iceD_getReturnConfirmation(Responses obj, final com.zeroc.IceInternal.Incoming inS, com.zeroc.Ice.Current current)
     {
         com.zeroc.Ice.Object._iceCheckMode(null, current.mode);
-        com.zeroc.Ice.InputStream istr = inS.startReadParams();
-        boolean iceP_didReturnSucceed;
-        iceP_didReturnSucceed = istr.readBool();
-        inS.endReadParams();
-        obj.getReturnResult(iceP_didReturnSucceed, current);
+        inS.readEmptyParams();
+        obj.getReturnConfirmation(current);
         return inS.setResult(inS.writeEmptyParams());
     }
 
@@ -125,9 +122,9 @@ public interface Responses extends com.zeroc.Ice.Object
     final static String[] _iceOps =
     {
         "getExpectedEndTime",
-        "getId",
+        "getNumber",
         "getResult",
-        "getReturnResult",
+        "getReturnConfirmation",
         "ice_id",
         "ice_ids",
         "ice_isA",
@@ -153,7 +150,7 @@ public interface Responses extends com.zeroc.Ice.Object
             }
             case 1:
             {
-                return _iceD_getId(this, in, current);
+                return _iceD_getNumber(this, in, current);
             }
             case 2:
             {
@@ -161,7 +158,7 @@ public interface Responses extends com.zeroc.Ice.Object
             }
             case 3:
             {
-                return _iceD_getReturnResult(this, in, current);
+                return _iceD_getReturnConfirmation(this, in, current);
             }
             case 4:
             {

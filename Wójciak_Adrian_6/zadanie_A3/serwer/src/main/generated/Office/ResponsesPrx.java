@@ -17,75 +17,72 @@ package Office;
 
 public interface ResponsesPrx extends com.zeroc.Ice.ObjectPrx
 {
-    default void getId(int suitorId)
+    default void getNumber(int number)
     {
-        getId(suitorId, com.zeroc.Ice.ObjectPrx.noExplicitContext);
+        getNumber(number, com.zeroc.Ice.ObjectPrx.noExplicitContext);
     }
 
-    default void getId(int suitorId, java.util.Map<String, String> context)
+    default void getNumber(int number, java.util.Map<String, String> context)
     {
-        _iceI_getIdAsync(suitorId, context, true).waitForResponse();
+        _iceI_getNumberAsync(number, context, true).waitForResponse();
     }
 
-    default java.util.concurrent.CompletableFuture<Void> getIdAsync(int suitorId)
+    default java.util.concurrent.CompletableFuture<Void> getNumberAsync(int number)
     {
-        return _iceI_getIdAsync(suitorId, com.zeroc.Ice.ObjectPrx.noExplicitContext, false);
+        return _iceI_getNumberAsync(number, com.zeroc.Ice.ObjectPrx.noExplicitContext, false);
     }
 
-    default java.util.concurrent.CompletableFuture<Void> getIdAsync(int suitorId, java.util.Map<String, String> context)
+    default java.util.concurrent.CompletableFuture<Void> getNumberAsync(int number, java.util.Map<String, String> context)
     {
-        return _iceI_getIdAsync(suitorId, context, false);
+        return _iceI_getNumberAsync(number, context, false);
     }
 
     /**
      * @hidden
-     * @param iceP_suitorId -
+     * @param iceP_number -
      * @param context -
      * @param sync -
      * @return -
      **/
-    default com.zeroc.IceInternal.OutgoingAsync<Void> _iceI_getIdAsync(int iceP_suitorId, java.util.Map<String, String> context, boolean sync)
+    default com.zeroc.IceInternal.OutgoingAsync<Void> _iceI_getNumberAsync(int iceP_number, java.util.Map<String, String> context, boolean sync)
     {
-        com.zeroc.IceInternal.OutgoingAsync<Void> f = new com.zeroc.IceInternal.OutgoingAsync<>(this, "getId", null, sync, null);
+        com.zeroc.IceInternal.OutgoingAsync<Void> f = new com.zeroc.IceInternal.OutgoingAsync<>(this, "getNumber", null, sync, null);
         f.invoke(false, context, null, ostr -> {
-                     ostr.writeInt(iceP_suitorId);
+                     ostr.writeInt(iceP_number);
                  }, null);
         return f;
     }
 
-    default void getReturnResult(boolean didReturnSucceed)
+    default void getReturnConfirmation()
     {
-        getReturnResult(didReturnSucceed, com.zeroc.Ice.ObjectPrx.noExplicitContext);
+        getReturnConfirmation(com.zeroc.Ice.ObjectPrx.noExplicitContext);
     }
 
-    default void getReturnResult(boolean didReturnSucceed, java.util.Map<String, String> context)
+    default void getReturnConfirmation(java.util.Map<String, String> context)
     {
-        _iceI_getReturnResultAsync(didReturnSucceed, context, true).waitForResponse();
+        _iceI_getReturnConfirmationAsync(context, true).waitForResponse();
     }
 
-    default java.util.concurrent.CompletableFuture<Void> getReturnResultAsync(boolean didReturnSucceed)
+    default java.util.concurrent.CompletableFuture<Void> getReturnConfirmationAsync()
     {
-        return _iceI_getReturnResultAsync(didReturnSucceed, com.zeroc.Ice.ObjectPrx.noExplicitContext, false);
+        return _iceI_getReturnConfirmationAsync(com.zeroc.Ice.ObjectPrx.noExplicitContext, false);
     }
 
-    default java.util.concurrent.CompletableFuture<Void> getReturnResultAsync(boolean didReturnSucceed, java.util.Map<String, String> context)
+    default java.util.concurrent.CompletableFuture<Void> getReturnConfirmationAsync(java.util.Map<String, String> context)
     {
-        return _iceI_getReturnResultAsync(didReturnSucceed, context, false);
+        return _iceI_getReturnConfirmationAsync(context, false);
     }
 
     /**
      * @hidden
-     * @param iceP_didReturnSucceed -
      * @param context -
      * @param sync -
      * @return -
      **/
-    default com.zeroc.IceInternal.OutgoingAsync<Void> _iceI_getReturnResultAsync(boolean iceP_didReturnSucceed, java.util.Map<String, String> context, boolean sync)
+    default com.zeroc.IceInternal.OutgoingAsync<Void> _iceI_getReturnConfirmationAsync(java.util.Map<String, String> context, boolean sync)
     {
-        com.zeroc.IceInternal.OutgoingAsync<Void> f = new com.zeroc.IceInternal.OutgoingAsync<>(this, "getReturnResult", null, sync, null);
-        f.invoke(false, context, null, ostr -> {
-                     ostr.writeBool(iceP_didReturnSucceed);
-                 }, null);
+        com.zeroc.IceInternal.OutgoingAsync<Void> f = new com.zeroc.IceInternal.OutgoingAsync<>(this, "getReturnConfirmation", null, sync, null);
+        f.invoke(false, context, null, null, null);
         return f;
     }
 

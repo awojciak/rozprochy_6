@@ -1,10 +1,13 @@
 import Office.ResponsesPrx;
+import Office.Result;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.concurrent.CompletableFuture;
 
 public class SuitorsData {
     Map<Integer, ResponsesPrx> suitors = new LinkedHashMap<>();
+    Map<Integer, CompletableFuture<Result>> results = new LinkedHashMap<>();
     Integer topId = 0;
 
     public static final SuitorsData instance = new SuitorsData();
@@ -22,16 +25,21 @@ public class SuitorsData {
         return topId;
     }
 
-    public boolean putNewSuitorProxy(Integer suitorId, ResponsesPrx proxy) {
-        if (suitors.containsKey(suitorId)) {
-            suitors.put(suitorId, proxy);
-            return true;
+    public void putNewSuitorProxy(Integer number, ResponsesPrx proxy) {
+        if (suitors.containsKey(number)) {
+            suitors.put(number, proxy);
         }
-
-        return false;
     }
 
-    public ResponsesPrx getSuitorProxy(Integer suitorId) {
-        return suitors.get(suitorId);
+    public ResponsesPrx getSuitorProxy(Integer number) {
+        return suitors.get(number);
+    }
+
+    public void putCase(Integer number, CompletableFuture<Result> newCase) {
+        results.put(number, newCase);
+    }
+
+    public CompletableFuture<Result> getResult(Integer number) {
+        return results.get(number);
     }
 }

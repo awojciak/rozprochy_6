@@ -1,18 +1,23 @@
-import sys, Ice, Office, os, time
+import sys
+import Ice
+import Office
+import os
+import time
 from ResponsesI import ResponsesI
 
 with Ice.initialize(sys.argv) as communicator:
     try:
-        base = communicator.stringToProxy('Requests.Proxy')
+        base = communicator.propertyToProxy('Requests.Proxy')
         requests_proxy = Office.RequestsPrx.checkedCast(base)
-    
+
         adapter = communicator.createObjectAdapter("")
-        responsesPrx = Office.ResponsesPrx.uncheckedCast(adapter.addwithUUID(ResponsesI()))
+        responsesPrx = Office.ResponsesPrx.uncheckedCast(adapter.addWithUUID(ResponsesI()))
         requests_proxy.ice_getCachedConnection().setAdapter(adapter)
+        requests_proxy.ice_getCachedConnection().setACM(Ice.Unset, Ice.Unset, Ice.ACMHeartbeat.HeartbeatAlways)
 
         if os.path.exists("./number.txt"):
             print('You have case number - wait until it resolves.')
-            numberFile = open('./number.txt', 'w')
+            numberFile = open('./number.txt', 'r')
             number = int(numberFile.read())
             numberFile.close()
             requests_proxy.onSuitorReturn(number, responsesPrx)
@@ -23,7 +28,7 @@ with Ice.initialize(sys.argv) as communicator:
 
                 time.sleep(10)
 
-        case_type = input('Now you can give us a new case. Select type:\n\tP - passport\n\tB - build permit\n\tD - demolition permit')
+        case_type = input('Now you can give us a new case. Select type:\n\tP - passport\n\tB - build permit\n\tD - demolition permit\n')
 
         if case_type == 'P':
             name = input('Name: ')
@@ -58,7 +63,7 @@ with Ice.initialize(sys.argv) as communicator:
 
         while True:
             time.sleep(10)
-            
+
             if not os.path.exists("./number.txt"):
                 break
     except Exception:

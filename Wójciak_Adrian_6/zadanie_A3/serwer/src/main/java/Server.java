@@ -10,11 +10,11 @@ public class Server {
 
         try	{
             communicator = Util.initialize(args);
-            ObjectAdapter adapter = communicator.createObjectAdapter("Adapter1");
+            ObjectAdapter adapter = communicator.createObjectAdapter("Adapter");
 
             RequestsI requests = new RequestsI();
 
-            adapter.add(requests, new Identity("requests", "office"));
+            adapter.add(requests, Util.stringToIdentity("Requests"));
 
             adapter.activate();
             System.out.println("Entering event processing loop...");

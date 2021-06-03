@@ -12,15 +12,15 @@ class ResponsesI(Responses):
         print('You have returned to the office without any problem. Now you can wait until your case is resolved.')
 
     def getExpectedEndTime(self, expectedEndTime, current):
-        print('Your case will be resolved expectedly at {}:{}:{}. Now you have to wait.'.format(expectedEndTime.get('hour'), expectedEndTime.get('minute'), expectedEndTime.get('second')))
+        print('Your case will be resolved expectedly at {}:{}:{}. Now you have to wait.'.format(expectedEndTime.hour, expectedEndTime.minute, expectedEndTime.second))
 
     def getResult(self, result, current):
         print('Your case:\n\tof type: {}\n\twas resolved with result: {}\n\tat: {}:{}:{}'.format(
-            result.get('caseType'),
-            'positively' if result.get('isResultPositive') == True else 'negatively',
-            result.get('finalEndTime').get('hour'),
-            result.get('finalEndTime').get('minute'),
-            result.get('finalEndTime').get('second')
+            result.caseType,
+            'positively' if result.isResultPositive == True else 'negatively',
+            result.finalEndTime.hour,
+            result.finalEndTime.minute,
+            result.finalEndTime.second
         ))
         
         if os.path.exists("./number.txt"):

@@ -2,14 +2,12 @@
 # The client reads this property to create the reference to the
 # "hello" object in the server.
 #
-Requests.Proxy=office/requests : tcp -h 127.0.0.2 -p 10000 -z : udp -h 127.0.0.2 -p 10000 -z
+Requests.Proxy=Requests : tcp -h 127.0.0.2 -p 10000
 
 #
 # Warn about connection exceptions.
 #
 Ice.Warn.Connections=1
-
-Ice.ACM.Timeout=10
 
 #
 # Network Tracing

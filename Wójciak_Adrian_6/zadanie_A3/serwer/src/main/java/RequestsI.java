@@ -14,19 +14,25 @@ public class RequestsI implements Requests {
     Random rand = new Random();
 
     @Override
-    public void onSuitorReturn(int number, ResponsesPrx responsesProxy, Current current) throws ExecutionException, InterruptedException {
-        data.putNewSuitorProxy(number, responsesProxy);
-        responsesProxy.getReturnConfirmation();
+    public void onSuitorReturn(int number, ResponsesPrx responsesProxy, Current current) {
+        data.putNewSuitorProxy(number, responsesProxy.ice_fixed(current.con));
+        responsesProxy.ice_fixed(current.con).getReturnConfirmation();
 
         if (data.getResult(number).isDone()) {
-            responsesProxy.getResult(data.getResult(number).get());
+            try {
+                responsesProxy.ice_fixed(current.con).getResult(data.getResult(number).get());
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            }
         }
     }
 
     @Override
     public void passportCase(ResponsesPrx responsesProxy, String name, String surname, int duration, Current current) {
-        Integer newId = data.putNewSuitor(responsesProxy);
-        responsesProxy.getNumber(newId);
+        Integer newId = data.putNewSuitor(responsesProxy.ice_fixed(current.con));
+        responsesProxy.ice_fixed(current.con).getNumber(newId);
 
         Integer expectedDuration = rand.nextInt(60) + 60;
         LocalTime time = LocalTime.now();
@@ -35,7 +41,7 @@ public class RequestsI implements Requests {
                 (time.getMinute() + ((time.getSecond() + expectedDuration) / 60)) % 60,
                 (time.getSecond() + expectedDuration) % 60
         );
-        responsesProxy.getExpectedEndTime(expectedEndTime);
+        responsesProxy.ice_fixed(current.con).getExpectedEndTime(expectedEndTime);
 
         Integer delay = rand.nextInt(30);
         Time finalEndTime = new Time(
@@ -63,8 +69,8 @@ public class RequestsI implements Requests {
 
     @Override
     public void buildPermitCase(ResponsesPrx responsesProxy, int surface, int height, boolean useSolarEnergy, boolean isWooden, Current current) {
-        Integer newId = data.putNewSuitor(responsesProxy);
-        responsesProxy.getNumber(newId);
+        Integer newId = data.putNewSuitor(responsesProxy.ice_fixed(current.con));
+        responsesProxy.ice_fixed(current.con).getNumber(newId);
 
         Integer expectedDuration = rand.nextInt(60) + 60;
         LocalTime time = LocalTime.now();
@@ -73,7 +79,7 @@ public class RequestsI implements Requests {
                 (time.getMinute() + ((time.getSecond() + expectedDuration) / 60)) % 60,
                 (time.getSecond() + expectedDuration) % 60
         );
-        responsesProxy.getExpectedEndTime(expectedEndTime);
+        responsesProxy.ice_fixed(current.con).getExpectedEndTime(expectedEndTime);
 
         Integer delay = rand.nextInt(30);
         Time finalEndTime = new Time(

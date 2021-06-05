@@ -1,7 +1,4 @@
-import Office.Requests;
-import Office.ResponsesPrx;
-import Office.Result;
-import Office.Time;
+import Office.*;
 import com.zeroc.Ice.Current;
 
 import java.time.LocalTime;
@@ -14,8 +11,14 @@ public class RequestsI implements Requests {
     Random rand = new Random();
 
     @Override
-    public void onSuitorReturn(int number, ResponsesPrx responsesProxy, Current current) {
-        data.putNewSuitorProxy(number, responsesProxy.ice_fixed(current.con));
+    public void onSuitorReturn(int number, ResponsesPrx responsesProxy, Current current) throws NoKnownSuitorError {
+        System.out.println("A suitor has returned");
+        boolean suitorExists = data.putNewSuitorProxy(number, responsesProxy.ice_fixed(current.con));
+
+        if (!suitorExists) {
+            throw new NoKnownSuitorError();
+        }
+
         responsesProxy.ice_fixed(current.con).getReturnConfirmation();
 
         if (data.getResult(number).isDone()) {
@@ -31,6 +34,7 @@ public class RequestsI implements Requests {
 
     @Override
     public void passportCase(ResponsesPrx responsesProxy, String name, String surname, int duration, Current current) {
+        System.out.println("New case - passport");
         Integer newId = data.putNewSuitor(responsesProxy.ice_fixed(current.con));
         responsesProxy.ice_fixed(current.con).getNumber(newId);
 
@@ -58,8 +62,9 @@ public class RequestsI implements Requests {
                     try {
                         Thread.sleep((expectedDuration + delay) * 1000);
                         SuitorsData.getInstance().getSuitorProxy(newId).getResult(result);
-                    } catch (InterruptedException e) {
+                    } catch (Exception e) {
                         e.printStackTrace();
+                        System.out.println("Server could not send a response. It will be tried later");
                     }
 
                     return result;
@@ -69,6 +74,7 @@ public class RequestsI implements Requests {
 
     @Override
     public void buildPermitCase(ResponsesPrx responsesProxy, int surface, int height, boolean useSolarEnergy, boolean isWooden, Current current) {
+        System.out.println("New case - build permit");
         Integer newId = data.putNewSuitor(responsesProxy.ice_fixed(current.con));
         responsesProxy.ice_fixed(current.con).getNumber(newId);
 
@@ -96,8 +102,9 @@ public class RequestsI implements Requests {
                     try {
                         Thread.sleep((expectedDuration + delay) * 1000);
                         SuitorsData.getInstance().getSuitorProxy(newId).getResult(result);
-                    } catch (InterruptedException e) {
+                    } catch (Exception e) {
                         e.printStackTrace();
+                        System.out.println("Server could not send a response. It will be tried later");
                     }
 
                     return result;
@@ -107,6 +114,7 @@ public class RequestsI implements Requests {
 
     @Override
     public void demolitionPermitCase(ResponsesPrx responsesProxy, int surface, int height, boolean useDynamite, Current current) {
+        System.out.println("New case - demolition permit");
         Integer newId = data.putNewSuitor(responsesProxy);
         responsesProxy.getNumber(newId);
 
@@ -134,8 +142,9 @@ public class RequestsI implements Requests {
                     try {
                         Thread.sleep((expectedDuration + delay) * 1000);
                         SuitorsData.getInstance().getSuitorProxy(newId).getResult(result);
-                    } catch (InterruptedException e) {
+                    } catch (Exception e) {
                         e.printStackTrace();
+                        System.out.println("Server could not send a response. It will be tried later");
                     }
 
                     return result;

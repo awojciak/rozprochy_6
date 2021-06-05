@@ -17,7 +17,8 @@ package Office;
 
 public interface Requests extends com.zeroc.Ice.Object
 {
-    void onSuitorReturn(int number, ResponsesPrx responsesProxy, com.zeroc.Ice.Current current);
+    void onSuitorReturn(int number, ResponsesPrx responsesProxy, com.zeroc.Ice.Current current)
+        throws NoKnownSuitorError;
 
     void passportCase(ResponsesPrx responsesProxy, String name, String surname, int duration, com.zeroc.Ice.Current current);
 
@@ -55,8 +56,10 @@ public interface Requests extends com.zeroc.Ice.Object
      * @param inS -
      * @param current -
      * @return -
+     * @throws com.zeroc.Ice.UserException -
     **/
     static java.util.concurrent.CompletionStage<com.zeroc.Ice.OutputStream> _iceD_onSuitorReturn(Requests obj, final com.zeroc.IceInternal.Incoming inS, com.zeroc.Ice.Current current)
+        throws com.zeroc.Ice.UserException
     {
         com.zeroc.Ice.Object._iceCheckMode(null, current.mode);
         com.zeroc.Ice.InputStream istr = inS.startReadParams();

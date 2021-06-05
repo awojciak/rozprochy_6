@@ -17,6 +17,8 @@ module Office
         string caseType;
     }
 
+    exception NoKnownSuitorError {}
+
     interface Responses
     {
         void getNumber(int number);
@@ -27,7 +29,7 @@ module Office
 
     interface Requests
     {
-        void onSuitorReturn(int number, Responses* responsesProxy);
+        void onSuitorReturn(int number, Responses* responsesProxy) throws NoKnownSuitorError;
         void passportCase(Responses* responsesProxy, string name, string surname, int duration);
         void buildPermitCase(Responses* responsesProxy, int surface, int height, bool useSolarEnergy, bool isWooden);
         void demolitionPermitCase(Responses* responsesProxy, int surface, int height, bool useDynamite);

@@ -25,10 +25,13 @@ public class SuitorsData {
         return topId;
     }
 
-    public void putNewSuitorProxy(Integer number, ResponsesPrx proxy) {
+    public boolean putNewSuitorProxy(Integer number, ResponsesPrx proxy) {
         if (suitors.containsKey(number)) {
             suitors.put(number, proxy);
+            return true;
         }
+
+        return false;
     }
 
     public ResponsesPrx getSuitorProxy(Integer number) {

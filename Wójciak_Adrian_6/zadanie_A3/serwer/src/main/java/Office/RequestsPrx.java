@@ -18,13 +18,26 @@ package Office;
 public interface RequestsPrx extends com.zeroc.Ice.ObjectPrx
 {
     default void onSuitorReturn(int number, ResponsesPrx responsesProxy)
+        throws NoKnownSuitorError
     {
         onSuitorReturn(number, responsesProxy, com.zeroc.Ice.ObjectPrx.noExplicitContext);
     }
 
     default void onSuitorReturn(int number, ResponsesPrx responsesProxy, java.util.Map<String, String> context)
+        throws NoKnownSuitorError
     {
-        _iceI_onSuitorReturnAsync(number, responsesProxy, context, true).waitForResponse();
+        try
+        {
+            _iceI_onSuitorReturnAsync(number, responsesProxy, context, true).waitForResponseOrUserEx();
+        }
+        catch(NoKnownSuitorError ex)
+        {
+            throw ex;
+        }
+        catch(com.zeroc.Ice.UserException ex)
+        {
+            throw new com.zeroc.Ice.UnknownUserException(ex.ice_id(), ex);
+        }
     }
 
     default java.util.concurrent.CompletableFuture<Void> onSuitorReturnAsync(int number, ResponsesPrx responsesProxy)
@@ -47,13 +60,19 @@ public interface RequestsPrx extends com.zeroc.Ice.ObjectPrx
      **/
     default com.zeroc.IceInternal.OutgoingAsync<Void> _iceI_onSuitorReturnAsync(int iceP_number, ResponsesPrx iceP_responsesProxy, java.util.Map<String, String> context, boolean sync)
     {
-        com.zeroc.IceInternal.OutgoingAsync<Void> f = new com.zeroc.IceInternal.OutgoingAsync<>(this, "onSuitorReturn", null, sync, null);
-        f.invoke(false, context, null, ostr -> {
+        com.zeroc.IceInternal.OutgoingAsync<Void> f = new com.zeroc.IceInternal.OutgoingAsync<>(this, "onSuitorReturn", null, sync, _iceE_onSuitorReturn);
+        f.invoke(true, context, null, ostr -> {
                      ostr.writeInt(iceP_number);
                      ostr.writeProxy(iceP_responsesProxy);
                  }, null);
         return f;
     }
+
+    /** @hidden */
+    static final Class<?>[] _iceE_onSuitorReturn =
+    {
+        NoKnownSuitorError.class
+    };
 
     default void passportCase(ResponsesPrx responsesProxy, String name, String surname, int duration)
     {

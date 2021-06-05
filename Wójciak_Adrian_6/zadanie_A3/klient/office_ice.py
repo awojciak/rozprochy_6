@@ -230,6 +230,25 @@ if 'Result' not in _M_Office.__dict__:
     _M_Office.Result = Result
     del Result
 
+if 'NoKnownSuitorError' not in _M_Office.__dict__:
+    _M_Office.NoKnownSuitorError = Ice.createTempClass()
+    class NoKnownSuitorError(Ice.UserException):
+        def __init__(self):
+            pass
+
+        def __str__(self):
+            return IcePy.stringifyException(self)
+
+        __repr__ = __str__
+
+        _ice_id = '::Office::NoKnownSuitorError'
+
+    _M_Office._t_NoKnownSuitorError = IcePy.defineException('::Office::NoKnownSuitorError', NoKnownSuitorError, (), False, None, ())
+    NoKnownSuitorError._ice_type = _M_Office._t_NoKnownSuitorError
+
+    _M_Office.NoKnownSuitorError = NoKnownSuitorError
+    del NoKnownSuitorError
+
 _M_Office._t_Responses = IcePy.defineValue('::Office::Responses', Ice.Value, -1, (), False, True, None, ())
 
 if 'ResponsesPrx' not in _M_Office.__dict__:
@@ -444,7 +463,7 @@ if 'RequestsPrx' not in _M_Office.__dict__:
     _M_Office._t_RequestsDisp = IcePy.defineClass('::Office::Requests', Requests, (), None, ())
     Requests._ice_type = _M_Office._t_RequestsDisp
 
-    Requests._op_onSuitorReturn = IcePy.Operation('onSuitorReturn', Ice.OperationMode.Normal, Ice.OperationMode.Normal, False, None, (), (((), IcePy._t_int, False, 0), ((), _M_Office._t_ResponsesPrx, False, 0)), (), None, ())
+    Requests._op_onSuitorReturn = IcePy.Operation('onSuitorReturn', Ice.OperationMode.Normal, Ice.OperationMode.Normal, False, None, (), (((), IcePy._t_int, False, 0), ((), _M_Office._t_ResponsesPrx, False, 0)), (), None, (_M_Office._t_NoKnownSuitorError,))
     Requests._op_passportCase = IcePy.Operation('passportCase', Ice.OperationMode.Normal, Ice.OperationMode.Normal, False, None, (), (((), _M_Office._t_ResponsesPrx, False, 0), ((), IcePy._t_string, False, 0), ((), IcePy._t_string, False, 0), ((), IcePy._t_int, False, 0)), (), None, ())
     Requests._op_buildPermitCase = IcePy.Operation('buildPermitCase', Ice.OperationMode.Normal, Ice.OperationMode.Normal, False, None, (), (((), _M_Office._t_ResponsesPrx, False, 0), ((), IcePy._t_int, False, 0), ((), IcePy._t_int, False, 0), ((), IcePy._t_bool, False, 0), ((), IcePy._t_bool, False, 0)), (), None, ())
     Requests._op_demolitionPermitCase = IcePy.Operation('demolitionPermitCase', Ice.OperationMode.Normal, Ice.OperationMode.Normal, False, None, (), (((), _M_Office._t_ResponsesPrx, False, 0), ((), IcePy._t_int, False, 0), ((), IcePy._t_int, False, 0), ((), IcePy._t_bool, False, 0)), (), None, ())

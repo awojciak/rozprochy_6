@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package example;
+
+message QuestionRequest {
+    string question = 1;
+}
+
+message QuestionAnswer {
+    string answer = 1;
+}
+
+service AnswersService {
+    rpc sayQuestion (QuestionRequest) returns (QuestionAnswer);
+}
+
+message SquareRequest {
+    int64 number = 1;
+}
+
+message Squared {
+    int64 squared = 1;
+}
+
+service SquaringService {
+    rpc getSquare (SquareRequest) returns (Squared);
+}

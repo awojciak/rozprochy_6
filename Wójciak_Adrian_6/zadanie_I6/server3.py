@@ -14,12 +14,16 @@ class AnswersService(example_pb2_grpc.AnswersServiceServicer):
         return example_pb2.QuestionAnswer(answer=newAnswer)
 
 def serve():
-    server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
-    example_pb2_grpc.add_AnswersServiceServicer_to_server(AnswersService(), server)
-    server.add_insecure_port('[::]:50053')
-    server.start()
-    print('Server is running...')
-    server.wait_for_termination()
+    try:
+        server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
+        example_pb2_grpc.add_AnswersServiceServicer_to_server(AnswersService(), server)
+        server.add_insecure_port('[::]:50053')
+        server.start()
+        print('Server is running...')
+        server.wait_for_termination()
+    except:
+        server.stop(None)
+        print("Server stopped.")
 
 if __name__ == '__main__':
     serve()

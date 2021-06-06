@@ -115,8 +115,8 @@ public class RequestsI implements Requests {
     @Override
     public void demolitionPermitCase(ResponsesPrx responsesProxy, int surface, int height, boolean useDynamite, Current current) {
         System.out.println("New case - demolition permit");
-        Integer newId = data.putNewSuitor(responsesProxy);
-        responsesProxy.getNumber(newId);
+        Integer newId = data.putNewSuitor(responsesProxy.ice_fixed(current.con));
+        responsesProxy.ice_fixed(current.con).getNumber(newId);
 
         Integer expectedDuration = rand.nextInt(60) + 60;
         LocalTime time = LocalTime.now();
@@ -125,7 +125,7 @@ public class RequestsI implements Requests {
                 (time.getMinute() + ((time.getSecond() + expectedDuration) / 60)) % 60,
                 (time.getSecond() + expectedDuration) % 60
         );
-        responsesProxy.getExpectedEndTime(expectedEndTime);
+        responsesProxy.ice_fixed(current.con).getExpectedEndTime(expectedEndTime);
 
         Integer delay = rand.nextInt(30);
         Time finalEndTime = new Time(

@@ -9,8 +9,7 @@ def run():
             newNumber = input('Give number to square: ')
             try:
                 newSquare = stub.getSquare(example_pb2.SquareRequest(number=int(newNumber)))
-                print(newSquare)
-                print('The square of number is: '.format(newSquare.squared))
+                print('The square of number is: {}'.format(newSquare.squared))
             except:
                 print("There was an exception. Try again.")
 

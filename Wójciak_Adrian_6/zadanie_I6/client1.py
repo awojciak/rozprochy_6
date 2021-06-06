@@ -9,7 +9,7 @@ def run():
             newQuestion = input('Say your question: ')
             try:
                 newAnswer = stub.sayQuestion(example_pb2.QuestionRequest(question=newQuestion))
-                print('The answer is: '.format(newAnswer.answer))
+                print('The answer is: {}'.format(newAnswer.answer))
             except:
                 print("There was an exception. Try again.")
 
